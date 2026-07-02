@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
 public class LoginTest extends BaseTest {
 
     private final By successMessage = By.xpath("//h2[normalize-space()='Dashboard Monitoring']");
+    private final By invalidUserIDOrPasswordMessage = By.xpath("//span[normalize-space()='Invalid credential']");
+
 
     @Test(description = "TC-01-0001 | Login dengan UserID dan Password Valid", priority = 1)
     public void loginWithUserIDAndPasswordValid() {
@@ -28,4 +30,36 @@ public class LoginTest extends BaseTest {
                 loginPage.getMessage(successMessage).contains("Dashboard Monitoring"), "Gagal login"
         );
     }
+
+    @Test(description = "TC-01-0002 | Login dengan invalid userID", priority = 2)
+    public void loginWithInvalidUserID() {
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.open();
+        loginPage.login(
+                "Yamal",
+                ConfigReader.getProperty("valid.password")
+        );
+
+        Assert.assertTrue(
+                loginPage.getMessage(invalidUserIDOrPasswordMessage).contains("Invalid credential"), "Pesan error login tidak sesuai"
+        );
+    }
+
+    @Test(description = "TC-01-0003 | Login dengan invalid Password", priority = 3)
+    public void loginWithInvalidPassword() {
+        LoginPage loginPage = new LoginPage(driver);
+
+        loginPage.open();
+        loginPage.login(
+                ConfigReader.getProperty("valid.username"),
+                "Salah Password"
+        );
+
+        Assert.assertTrue(
+                loginPage.getMessage(invalidUserIDOrPasswordMessage).contains("Invalid credential"), "Pesan error login tidak sesuai"
+        );
+    }
+
+
 }
