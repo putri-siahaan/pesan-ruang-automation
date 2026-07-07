@@ -4,6 +4,8 @@ import com.sdd.ibranch.base.BaseTest;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import com.sdd.ibranch.utils.ScreenshotUtil;
+
 
 public class TestListener implements ITestListener {
 
@@ -25,15 +27,33 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult result) {
         passed++;
-        BaseTest.test.pass("Test Passed");
+
+        BaseTest baseTest = (BaseTest) result.getInstance();
+
+        String screenshot =
+                ScreenshotUtil.takeScreenshot(
+                        baseTest.getDriver(),
+                        result.getMethod().getMethodName());
+
+        BaseTest.test
+                .pass("Test Passed")
+                .addScreenCaptureFromPath(screenshot);
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         failed++;
-        BaseTest.test.fail(
-                result.getThrowable()
-        );
+
+        BaseTest baseTest = (BaseTest) result.getInstance();
+
+        String screenshot =
+                ScreenshotUtil.takeScreenshot(
+                        baseTest.getDriver(),
+                        result.getMethod().getMethodName());
+
+        BaseTest.test
+                .fail(result.getThrowable())
+                .addScreenCaptureFromPath(screenshot);
     }
 
     @Override

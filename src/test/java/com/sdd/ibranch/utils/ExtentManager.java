@@ -16,8 +16,8 @@ public class ExtentManager {
 
             extent.attachReporter(spark);
 
-            extent.setSystemInfo("Automation", "HRMONY V1");
-            extent.setSystemInfo("Tester", "Citra");
+            extent.setSystemInfo("Automation", "IBRANCH");
+            extent.setSystemInfo("Tester", "Putri");
         }
 
         return extent;
