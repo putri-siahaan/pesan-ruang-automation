@@ -24,6 +24,11 @@ public class MRegionalPage {
     private final By deskripsiRegional = By.cssSelector("[data-testid='tbregiondesc']");
     private final By buttonSimpan = By.cssSelector("[data-testid='btnsave']");
     private final By buttonOK = By.xpath("//button[normalize-space()='OK']");
+    private final By fieldSearch = By.cssSelector("[data-testid='tbsearch']");
+    private final By buttonSearch = By.cssSelector("[data-testid='btnsearch']");
+
+
+
 
     public void openPageRegional(){
         wait.until(ExpectedConditions.elementToBeClickable(parameterMenu)).click();
@@ -43,6 +48,11 @@ public class MRegionalPage {
 
     public void closeSuccessPopup(){
         wait.until(ExpectedConditions.elementToBeClickable(buttonOK)).click();
+    }
+
+    public void searchDataRegional(String searchReg){
+        wait.until(ExpectedConditions.elementToBeClickable(fieldSearch)).sendKeys(searchReg);
+        wait.until(ExpectedConditions.elementToBeClickable(buttonSearch)).click();
     }
 
     public String getMessage(By var) {
