@@ -1,7 +1,7 @@
-package com.sdd.ibranch.base;
+package com.sdd.pesanruang.base;
 
-import com.sdd.ibranch.pages.LoginPage;
-import com.sdd.ibranch.utils.ConfigReader;
+import com.sdd.pesanruang.pages.LoginPage;
+import com.sdd.pesanruang.utils.ConfigReader;
 import org.testng.annotations.BeforeMethod;
 
 public class AuthenBaseTest extends BaseTest {
@@ -10,7 +10,7 @@ public class AuthenBaseTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
         loginPage.login(
-                ConfigReader.getProperty("valid.username"),
+                ConfigReader.getProperty("valid.npporemail"),
                 ConfigReader.getProperty("valid.password")
         );
     }

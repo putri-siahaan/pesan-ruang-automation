@@ -1,17 +1,17 @@
-package com.sdd.ibranch.tests;
+package com.sdd.pesanruang.tests;
 
-import com.sdd.ibranch.base.BaseTest;
-import com.sdd.ibranch.pages.LoginPage;
-import com.sdd.ibranch.utils.ConfigReader;
+import com.sdd.pesanruang.base.BaseTest;
+import com.sdd.pesanruang.pages.LoginPage;
+import com.sdd.pesanruang.utils.ConfigReader;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginTest extends BaseTest {
 
-    private final By successMessage = By.xpath("//h2[normalize-space()='Dashboard Monitoring']");
-    private final By invalidUserIDOrPasswordMessage = By.xpath("//span[normalize-space()='Invalid credential']");
-    private final By emptyUserIdAndPasswordMessage = By.xpath("//span[normalize-space()='Mohon Masukkan Userid dan Password']");
+    private final By successMessage = By.cssSelector("[data-test-id='lblTopbarPageTitle']");
+    private final By invalidNppOrEmailMessage = By.cssSelector("[id='swal2-html-container']");
+    private final By emptyNppEmailAndPasswordMessage = By.cssSelector("[id='swal2-html-container']");
 
 
     @Test(description = "TC-01-0001 | Login dengan UserID dan Password Valid", priority = 1)
@@ -19,26 +19,26 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
 
         loginPage.login(
-                ConfigReader.getProperty("valid.username"),
+                ConfigReader.getProperty("valid.npporemail"),
                 ConfigReader.getProperty("valid.password")
         );
 
         Assert.assertTrue(
-                loginPage.getMessage(successMessage).contains("Dashboard Monitoring"), "Gagal login"
+                loginPage.getMessage(successMessage).contains("Dashboard"), "Gagal login"
         );
     }
 
-    @Test(description = "TC-01-0002 | Login dengan invalid userID", priority = 2)
+    @Test(description = "TC-01-0002 | Login dengan invalid NPP / Email", priority = 2)
     public void loginWithInvalidUserID() {
         LoginPage loginPage = new LoginPage(driver);
 
         loginPage.login(
-                "Yamal",
+                "SDD2703",
                 ConfigReader.getProperty("valid.password")
         );
 
         Assert.assertTrue(
-                loginPage.getMessage(invalidUserIDOrPasswordMessage).contains("Invalid credential"), "Pesan error login tidak sesuai"
+                loginPage.getMessage(invalidNppOrEmailMessage).contains("Username/password salah."), "Pesan error login tidak sesuai"
         );
     }
 
@@ -47,16 +47,16 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
 
         loginPage.login(
-                ConfigReader.getProperty("valid.username"),
-                "Salah Password"
+                ConfigReader.getProperty("valid.npporemail"),
+                "WRONGPASSWORDDD"
         );
 
         Assert.assertTrue(
-                loginPage.getMessage(invalidUserIDOrPasswordMessage).contains("Invalid credential"), "Pesan error login tidak sesuai"
+                loginPage.getMessage(invalidNppOrEmailMessage).contains("Username/password salah."), "Pesan error login tidak sesuai"
         );
     }
 
-    @Test(description = "TC-01-0004 | Login dengan empty user id ", priority = 4)
+    @Test(description = "TC-01-0004 | Login dengan empty Npp or Email ", priority = 4)
     public void loginWithEmptyUserId() {
         LoginPage loginPage = new LoginPage(driver);
 
@@ -66,7 +66,7 @@ public class LoginTest extends BaseTest {
         );
 
         Assert.assertTrue(
-                loginPage.getMessage(emptyUserIdAndPasswordMessage).contains("Mohon Masukkan Userid dan Password"), "Pesan error login tidak sesuai"
+                loginPage.getMessage(emptyNppEmailAndPasswordMessage).contains("Harap isi NPP/email dan password."), "Pesan error login tidak sesuai"
         );
     }
 
@@ -76,12 +76,12 @@ public class LoginTest extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
 
         loginPage.login(
-                ConfigReader.getProperty("valid.username"),
+                ConfigReader.getProperty("valid.npporemail"),
                 ""
         );
 
         Assert.assertTrue(
-                loginPage.getMessage(emptyUserIdAndPasswordMessage).contains("Mohon Masukkan Userid dan Password"), "Pesan error login tidak sesuai"
+                loginPage.getMessage(emptyNppEmailAndPasswordMessage).contains("Harap isi NPP/email dan password."), "Pesan error login tidak sesuai"
         );
     }
 
@@ -96,7 +96,7 @@ public class LoginTest extends BaseTest {
         );
 
         Assert.assertTrue(
-                loginPage.getMessage(emptyUserIdAndPasswordMessage).contains("Mohon Masukkan Userid dan Password"), "Pesan error login tidak sesuai"
+                loginPage.getMessage(emptyNppEmailAndPasswordMessage).contains("Harap isi NPP/email dan password."), "Pesan error login tidak sesuai"
         );
     }
 

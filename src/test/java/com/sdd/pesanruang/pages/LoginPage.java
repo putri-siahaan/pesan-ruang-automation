@@ -1,6 +1,6 @@
-package com.sdd.ibranch.pages;
+package com.sdd.pesanruang.pages;
 
-import com.sdd.ibranch.utils.ConfigReader;
+import com.sdd.pesanruang.utils.ConfigReader;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,9 +13,9 @@ public class LoginPage {
 
     private WebDriver driver;
 
-    private final By userid = By.cssSelector("[data-testid='userid']");
-    private final By password = By.cssSelector("[data-testid='password']");
-    private final By login = By.cssSelector("[data-testid='btnlogin']");
+    private final By nppemail = By.cssSelector("[data-test-id='tbUserid']");
+    private final By password = By.cssSelector("[data-test-id='tbPassword']");
+    private final By buttonLogin = By.cssSelector("[data-test-id='btnLogin']");
 
 
     public LoginPage(WebDriver driver) {
@@ -29,9 +29,9 @@ public class LoginPage {
     }
 
     public void login(String user, String pass) {
-        driver.findElement(userid).sendKeys(user);
+        driver.findElement(nppemail).sendKeys(user);
         driver.findElement(password).sendKeys(pass);
-        driver.findElement(login).click();
+        driver.findElement(buttonLogin).click();
     }
 
     public String getMessage(By var) {

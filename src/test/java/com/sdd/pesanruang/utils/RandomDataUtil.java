@@ -1,4 +1,4 @@
-package com.sdd.ibranch.utils;
+package com.sdd.pesanruang.utils;
 
 import java.util.Random;
 
@@ -21,7 +21,7 @@ public class RandomDataUtil {
     }
 
     // Deskripsi
-    public static String generateDescription() {
+    public static String generateAlamat() {
         return "DESC_" + System.currentTimeMillis();
     }
 }

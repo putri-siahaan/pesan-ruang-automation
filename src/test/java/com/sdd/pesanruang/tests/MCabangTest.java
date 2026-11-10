@@ -1,38 +1,37 @@
-package com.sdd.ibranch.tests;
-
-import com.sdd.ibranch.base.AuthenBaseTest;
-import com.sdd.ibranch.pages.MCabangPage;
-import com.sdd.ibranch.pages.MRegionalPage;
-import org.openqa.selenium.By;
-import org.testng.Assert;
-import org.testng.annotations.Test;
-
-public class MCabangTest extends AuthenBaseTest {
-
-    private final By parameterMessage = By.xpath("/html/body/div[1]/div/div[2]/div[2]/div[2]/h3/span/span");
-    private final By formCabang = By.xpath("/html/body/div[4]/div/div/div/div/div[1]/div/div/h3/span");
-
-    @Test(description = "TC-03-0001 | Open Menu Parameter Cabang", priority = 1)
-    public void openMenuCabang() {
-        MCabangPage mCabangPage = new MCabangPage(driver);
-
-        mCabangPage.openPageCabang();
-
-        Assert.assertTrue(
-                mCabangPage.getMessage(parameterMessage).contains("Parameter Cabang"), "Gagal menampilkan Menu Parameter Cabang"
-        );
-    }
-
-    @Test(description = "TC-03-0002 | Create Parameter Cabang", priority = 2)
-    public void createParameterCabang() {
-        MCabangPage mCabangPage = new MCabangPage(driver);
-
-        mCabangPage.openPageCabang();
-        mCabangPage.createParameterCabang();
-
-        Assert.assertTrue(
-                mCabangPage.getMessage(formCabang).contains("Form Cabang"), "Gagal menampilkan Form Cabang"
-        );
-    }
-
-}
+//package com.sdd.pesanruang.tests;
+//
+//import com.sdd.pesanruang.base.AuthenBaseTest;
+//import com.sdd.pesanruang.pages.MLokasi;
+//import org.openqa.selenium.By;
+//import org.testng.Assert;
+//import org.testng.annotations.Test;
+//
+//public class MCabangTest extends AuthenBaseTest {
+//
+//    private final By successCreateMaster = By.xpath("//*[@id=\"swal2-html-container\"]");
+//    //private final By formCabang = By.xpath("//*[@id=\"swal2-html-container\"]");
+//
+//    @Test(description = "TC-02-0001 | Create Master Lokasi", priority = 1)
+//    public void openMenuCabang() {
+//        MLokasi mLokasiPage = new MLokasi(driver);
+//
+//        mLokasiPage.openPageCabang();
+//
+//        Assert.assertTrue(
+//                mLokasiPage.getMessage(successCreateMaster).contains("Data lokasi berhasil disimpan."), "Gagal create master lokasi"
+//        );
+//    }
+//
+//    @Test(description = "TC-03-0002 | Create Parameter Cabang", priority = 2)
+//    public void createParameterCabang() {
+//        MLokasi mCabangPage = new MLokasi(driver);
+//
+//        mCabangPage.openPageCabang();
+//        mCabangPage.createParameterCabang();
+//
+//        Assert.assertTrue(
+//                mCabangPage.getMessage(formCabang).contains("Form Cabang"), "Gagal menampilkan Form Cabang"
+//        );
+//    }
+//
+//}

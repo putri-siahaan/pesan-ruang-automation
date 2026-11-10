@@ -5,7 +5,7 @@
     <test name="Login Tests">
 
         <classes>
-            <class name="com.sdd.ibranch.tests.LoginTest"/>
+            <class name="com.sdd.pesanruang.tests.LoginTest"/>
         </classes>
 
     </test>

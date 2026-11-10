@@ -1,102 +1,39 @@
 package com.sdd.pesanruang.tests;
 
-import com.sdd.pesanruang.base.BaseTest;
-import com.sdd.pesanruang.pages.LoginPage;
-import com.sdd.pesanruang.utils.ConfigReader;
+import com.sdd.pesanruang.base.AuthenBaseTest;
+import com.sdd.pesanruang.pages.BookingList;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class LoginTest extends BaseTest {
+public class BookingListTest extends AuthenBaseTest {
 
-    private final By successMessage = By.cssSelector("[data-test-id='lblTopbarPageTitle']");
-    private final By invalidNppOrEmailMessage = By.cssSelector("[id='swal2-html-container']");
-    private final By emptyNppEmailAndPasswordMessage = By.cssSelector("[id='swal2-html-container']");
+    private final By successMessageBookingData = By.xpath("/html/body/div[6]/div/div[2]");
+//    private final By invalidNppOrEmailMessage = By.cssSelector("[id='swal2-html-container']");
+//    private final By emptyNppEmailAndPasswordMessage = By.cssSelector("[id='swal2-html-container']");
 
 
-    @Test(description = "TC-01-0001 | Login dengan UserID dan Password Valid", priority = 1)
-    public void loginWithUserIDAndPasswordValid() {
-        LoginPage loginPage = new LoginPage(driver);
+    @Test(description = "TC-02-0001 | Tambah Data Booking Tipe Per Jam dengan valid data", priority = 1)
+    public void addBookingRoomPerHourWithValidData() {
+        BookingList bookingList = new BookingList(driver);
 
-        loginPage.login(
-                ConfigReader.getProperty("valid.npporemail"),
-                ConfigReader.getProperty("valid.password")
-        );
+        bookingList.openPageMenuBookingList();
+        bookingList.addBookingDataTypePerJam("Pesan Ruang Meeting Project DIGIMS","Kantor Cabang Cawang", "Meeting akan dihadiri PM, dev, dan QA");
 
         Assert.assertTrue(
-                loginPage.getMessage(successMessage).contains("Dashboard"), "Gagal login"
+                bookingList.getMessage(successMessageBookingData).contains("Booking berhasil disimpan."), "Gagal Booking Ruangan"
         );
     }
 
-    @Test(description = "TC-01-0002 | Login dengan invalid NPP / Email", priority = 2)
-    public void loginWithInvalidUserID() {
-        LoginPage loginPage = new LoginPage(driver);
+    @Test(description = "TC-02-0002 | Tambah Data Booking Tipe Harian dengan valid data", priority = 2)
+    public void addBookingRoomPerDayWithValidData() {
+        BookingList bookingList = new BookingList(driver);
 
-        loginPage.login(
-                "SDD2703",
-                ConfigReader.getProperty("valid.password")
-        );
+        bookingList.openPageMenuBookingList();
+        bookingList.addBookingDataTypePerDay("Booking Room untuk Meeting Pesan Ruang","Kantor Cabang Cawang", "Progress QA Testing Pesan Ruang");
 
         Assert.assertTrue(
-                loginPage.getMessage(invalidNppOrEmailMessage).contains("Username/password salah."), "Pesan error login tidak sesuai"
-        );
-    }
-
-    @Test(description = "TC-01-0003 | Login dengan invalid Password", priority = 3)
-    public void loginWithInvalidPassword() {
-        LoginPage loginPage = new LoginPage(driver);
-
-        loginPage.login(
-                ConfigReader.getProperty("valid.npporemail"),
-                "WRONGPASSWORDDD"
-        );
-
-        Assert.assertTrue(
-                loginPage.getMessage(invalidNppOrEmailMessage).contains("Username/password salah."), "Pesan error login tidak sesuai"
-        );
-    }
-
-    @Test(description = "TC-01-0004 | Login dengan empty Npp or Email ", priority = 4)
-    public void loginWithEmptyUserId() {
-        LoginPage loginPage = new LoginPage(driver);
-
-        loginPage.login(
-                "",
-                ConfigReader.getProperty("valid.password")
-        );
-
-        Assert.assertTrue(
-                loginPage.getMessage(emptyNppEmailAndPasswordMessage).contains("Harap isi NPP/email dan password."), "Pesan error login tidak sesuai"
-        );
-    }
-
-
-    @Test(description = "TC-01-0005 | Login dengan empty password", priority = 5)
-    public void loginWithEmptyPassword() {
-        LoginPage loginPage = new LoginPage(driver);
-
-        loginPage.login(
-                ConfigReader.getProperty("valid.npporemail"),
-                ""
-        );
-
-        Assert.assertTrue(
-                loginPage.getMessage(emptyNppEmailAndPasswordMessage).contains("Harap isi NPP/email dan password."), "Pesan error login tidak sesuai"
-        );
-    }
-
-
-    @Test(description = "TC-01-0006 | Login dengan empty user id and password", priority = 5)
-    public void loginWithEmptyUserIdAndPassword() {
-        LoginPage loginPage = new LoginPage(driver);
-
-        loginPage.login(
-                "",
-                ""
-        );
-
-        Assert.assertTrue(
-                loginPage.getMessage(emptyNppEmailAndPasswordMessage).contains("Harap isi NPP/email dan password."), "Pesan error login tidak sesuai"
+                bookingList.getMessage(successMessageBookingData).contains("Booking berhasil disimpan."), "Gagal Booking Ruangan"
         );
     }
 
