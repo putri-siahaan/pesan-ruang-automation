@@ -1,4 +1,4 @@
-package com.sdd.ibranch.pages;
+package com.sdd.pesanruang.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -16,7 +16,7 @@ public class MCabangPage {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(60));
     }
 
-    private final By parameterMenu = By.xpath("//span[normalize-space()='Parameter']");
+    private final By menuCMS = By.cssSelector("navSidebarGroupHeader_CMS");
     private final By parameterCabangSub = By.xpath("//span[normalize-space()='Parameter Cabang']");
     private final By buttonCreate = By.xpath("/html/body/div[1]/div/div[2]/div[2]/div[2]/div/div/div[2]/button[1]");
 
